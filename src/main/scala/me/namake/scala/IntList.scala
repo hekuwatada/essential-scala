@@ -2,15 +2,15 @@ package me.namake.scala
 
 sealed trait IntList {
   def product: Int =
-    this match {
-      case End => 1
-      case Pair(head, tail) => head * tail.product
-    }
+    abstraction(1, (x, y) => x * y)
 
   def sum: Int =
+    abstraction(0, (x, y) => x + y)
+
+  def abstraction(end: Int, f: (Int, Int) => Int): Int =
     this match {
-      case End => 0
-      case Pair(head, tail) => head + tail.sum
+      case End => end
+      case Pair(head, tail) => f(head, tail.abstraction(end, f))
     }
 }
 
