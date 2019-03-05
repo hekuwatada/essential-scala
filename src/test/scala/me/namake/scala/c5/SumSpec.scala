@@ -10,4 +10,11 @@ class SumSpec extends FunSpec with Matchers {
       Right[Int, String]("foo").value shouldBe "foo"
     }
   }
+
+  describe("fold") {
+    it("transforms A or B to C") {
+      Left[Int, Boolean](3).fold(_.toString, _.toString) shouldBe "3"
+      Right[Int, Boolean](false).fold(_.toString, _.toString) shouldBe "false"
+    }
+  }
 }
