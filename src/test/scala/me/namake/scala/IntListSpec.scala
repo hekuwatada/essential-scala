@@ -11,6 +11,14 @@ class IntListSpec extends FunSpec with Matchers {
     }
   }
 
+  describe("length") {
+    it("returns length of list") {
+      End.length shouldBe 0
+      Pair(1, End).length shouldBe 1
+      Pair(1, Pair(2, Pair(3, Pair(4, End)))).length shouldBe 4
+    }
+  }
+
   describe("product") {
     it("returns product") {
       End.product shouldBe 1
