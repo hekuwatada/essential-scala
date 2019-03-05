@@ -1,19 +1,16 @@
 package me.namake.scala
 
 sealed trait IntList {
-  def sum: Int = fold(0)((x, y) => x + y)
+  def sum: Int = fold(0)(_ + _)
 
-  def product: Int = fold(1)((x, y) => x * y)
+  def product: Int = fold(1)(_ * _)
 
   def length: Int = fold(0)((_, y) => 1 + y)
 
-  def double: IntList =
-    this match {
-      case End => End
-      case Pair(head, tail) => Pair(head * 2, tail.double)
-    }
+  def double: IntList = fold(End: IntList)((el, list) => Pair(el * 2, list))
 
-  def fold(end: Int)(f: (Int, Int) => Int): Int =
+  //TODO: make it tail recursive
+  def fold[A](end: A)(f: (Int, A) => A): A =
     this match {
       case End => end
       case Pair(head, tail) => f(head, tail.fold(end)(f))
