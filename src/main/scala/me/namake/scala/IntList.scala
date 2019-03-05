@@ -1,16 +1,14 @@
 package me.namake.scala
 
 sealed trait IntList {
-  def product: Int =
-    abstraction(1, (x, y) => x * y)
+  def product: Int = fold(1)((x, y) => x * y)
 
-  def sum: Int =
-    abstraction(0, (x, y) => x + y)
+  def sum: Int = fold(0)((x, y) => x + y)
 
-  def abstraction(end: Int, f: (Int, Int) => Int): Int =
+  def fold(end: Int)(f: (Int, Int) => Int): Int =
     this match {
       case End => end
-      case Pair(head, tail) => f(head, tail.abstraction(end, f))
+      case Pair(head, tail) => f(head, tail.fold(end)(f))
     }
 }
 
