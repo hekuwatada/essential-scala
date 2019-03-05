@@ -5,9 +5,9 @@ sealed trait IntList {
 
   def product: Int = fold(1)(_ * _)
 
-  def length: Int = fold(0)((_, y) => 1 + y)
+  def length: Int = fold(0)((_, tail) => 1 + tail)
 
-  def double: IntList = fold(End: IntList)((el, list) => Pair(el * 2, list))
+  def double: IntList = fold(End: IntList)((head, tail) => Pair(head * 2, tail))
 
   //TODO: make it tail recursive
   def fold[A](end: A)(f: (Int, A) => A): A =
