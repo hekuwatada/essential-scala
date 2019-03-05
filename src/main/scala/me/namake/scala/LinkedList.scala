@@ -23,5 +23,6 @@ sealed trait LinkedList[A] {
     }
 }
 
-case class End[A]() extends LinkedList[A]
-case class Pair[A](head: A, tail: LinkedList[A]) extends LinkedList[A]
+//TODO: re-implement methods for IntList as LinkedList[Int]
+final case class End[A]() extends LinkedList[A]
+final case class Pair[A](head: A, tail: LinkedList[A]) extends LinkedList[A]
