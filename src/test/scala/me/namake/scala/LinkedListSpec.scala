@@ -24,4 +24,14 @@ class LinkedListSpec extends FunSpec with Matchers {
       Pair(1, Pair(2, End())).fold(End(): LinkedList[Int])((h, t) => Pair(h * 2, t)) shouldBe Pair(2, Pair(4, End()))
     }
   }
+
+  describe("multiple parameter list for type inference") {
+    it("requires type in single parameter list") {
+      val list = Pair(1, Pair(2, End()))
+      //NOTE: fold(B)((A, B) => B) - the second B can be inferred
+      list.fold(0)(_ + _) shouldBe 3
+      //NOTE: fold2(B, (A, B) => B) - the second B cannot be inferred
+      list.fold2(0, (x, y: Int) => x + y) shouldBe 3
+    }
+  }
 }

@@ -11,6 +11,16 @@ sealed trait LinkedList[A] {
       case End() => end
       case Pair(head, tail) => f(head, tail.fold(end)(f))
     }
+
+  /**
+    * Example to highlight that complier can infer type once per parameter list.
+    * It cannot therefore infer type B for f after B for end.
+    */
+  def fold2[B](end: B, f: (A, B) => B): B =
+    this match {
+      case End() => end
+      case Pair(head, tail) => f(head, tail.fold2(end, f))
+    }
 }
 
 case class End[A]() extends LinkedList[A]
