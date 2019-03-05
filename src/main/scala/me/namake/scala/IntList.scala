@@ -3,11 +3,7 @@ package me.namake.scala
 sealed trait IntList {
   def sum: Int = fold(0)((x, y) => x + y)
 
-  def length: Int =
-    this match {
-      case End => 0
-      case Pair(_, tail) => 1 + tail.length
-    }
+  def length: Int = fold(0)((_, y) => 1 + y)
 
   def product: Int = fold(1)((x, y) => x * y)
 
