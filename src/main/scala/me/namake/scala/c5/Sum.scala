@@ -1,5 +1,8 @@
 package me.namake.scala.c5
 
+/**
+  * Sum type pattern (OR) - Scala provides Either
+  */
 trait Sum[A, B]
 
 final case class Left[A, B](value: A) extends Sum[A, B]
