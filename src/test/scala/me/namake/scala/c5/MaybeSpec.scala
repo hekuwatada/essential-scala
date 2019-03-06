@@ -33,8 +33,8 @@ class MaybeSpec extends FunSpec with Matchers {
 
   describe("map") {
     it("returns Maybe[B] when A => B is given") {
-      Empty[Int].map(_.toString) shouldBe Empty[String]()
-      Full(1).map(_.toString) shouldBe Full("1")
+      Empty[Int].map2(_.toString) shouldBe Empty[String]()
+      Full(1).map2(_.toString) shouldBe Full("1")
     }
   }
 }

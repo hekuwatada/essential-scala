@@ -34,11 +34,17 @@ trait Maybe[A] {
     * map - Given A => B, return F[B]
     */
   // Functor
-  def map[B](f: A => B): Maybe[B] =
+  def map[B](f: A => B): Maybe[B] = flatMap(f.andThen(Maybe.pure))
+
+  def map2[B](f: A => B): Maybe[B] =
     this match {
       case Empty() => Empty[B]()
       case Full(value) => Full(f(value))
     }
+}
+
+object Maybe {
+  def pure[A](a: A): Maybe[A] = Full(a)
 }
 
 final case class Full[A](value: A) extends Maybe[A]
