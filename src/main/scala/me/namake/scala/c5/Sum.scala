@@ -10,6 +10,14 @@ trait Sum[A, B] {
       case Left(value) => leftF(value)
       case Right(value) => rightF(value)
     }
+
+  def flatMap[C, D](leftF: A => Sum[C, D], rightF: B => Sum[C, D]): Sum[C, D] = ???
+
+  def map[C, D](leftF: A => C, rightF: B => D): Sum[C, D] =
+    this match {
+      case Left(value) => Left(leftF(value))
+      case Right(value) => Right(rightF(value))
+    }
 }
 
 final case class Left[A, B](value: A) extends Sum[A, B]
