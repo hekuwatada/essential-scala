@@ -6,8 +6,8 @@ class SumSpec extends FunSpec with Matchers {
 
   describe("sum type data structure") {
     it("has one of two possibly different types") {
-      Left[Int, String](1).value shouldBe 1
-      Right[Int, String]("foo").value shouldBe "foo"
+      Left(1).value shouldBe 1
+      Right("foo").value shouldBe "foo"
     }
   }
 
@@ -22,6 +22,13 @@ class SumSpec extends FunSpec with Matchers {
     it("transforms Sum[A, B] to Sum[A, C]") {
       Right(false).map(x => if (x) 1 else 0) shouldBe Right(0)
       Left("left").map((_: Int).toString) shouldBe Left("left")
+    }
+  }
+
+  describe("flatMap") {
+    it("transforms Sum[A, B] to Sum[A, C]") {
+      Right[Int, Boolean](false).flatMap(x => if (x) Right(1) else Right(0)) shouldBe Right(0)
+      Left("left").flatMap((x: Int) => Right(x.toString)) shouldBe Left("left")
     }
   }
 }
