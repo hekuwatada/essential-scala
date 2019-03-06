@@ -34,4 +34,13 @@ class LinkedListSpec extends FunSpec with Matchers {
       list.fold2(0, (x, y: Int) => x + y) shouldBe 3
     }
   }
+
+  describe("map") {
+    it("transfers A to B") {
+      End[Int]().map(_.toString) shouldBe End[String]()
+      Pair(2, End()).map(_.toString) shouldBe Pair("2", End())
+      Pair(1, Pair(2, End()))
+        .map(_.toString) shouldBe Pair("1", Pair("2", End()))
+    }
+  }
 }

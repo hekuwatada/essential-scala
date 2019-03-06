@@ -21,6 +21,13 @@ sealed trait LinkedList[A] {
       case End() => end
       case Pair(head, tail) => f(head, tail.fold2(end, f))
     }
+
+  //TODO: make it tail recursive
+  def map[B](f: A => B): LinkedList[B] =
+    this match {
+      case End() => End[B]()
+      case Pair(head, tail) => Pair(f(head), tail.map(f))
+    }
 }
 
 //TODO: re-implement methods for IntList as LinkedList[Int]
