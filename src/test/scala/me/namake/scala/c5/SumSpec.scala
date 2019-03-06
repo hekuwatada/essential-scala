@@ -19,9 +19,9 @@ class SumSpec extends FunSpec with Matchers {
   }
 
   describe("map") {
-    it("transforms Sum[A, B] to Sum[C, D]") {
-      Left[Int, Boolean](3).map(_ + 1, _.toString) shouldBe Left[Int, String](4)
-      Right[Int, Boolean](false).map(_.toString, x => if(x) 1 else 0) shouldBe Right[Int, Int](0)
+    it("transforms Sum[A, B] to Sum[A, C]") {
+      Right(false).map(x => if (x) 1 else 0) shouldBe Right(0)
+      Left("left").map((_: Int).toString) shouldBe Left("left")
     }
   }
 }
