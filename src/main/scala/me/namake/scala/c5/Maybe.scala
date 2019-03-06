@@ -19,6 +19,15 @@ trait Maybe[A] {
       case Empty() => end
       case Full(value) => f(value, end)
     }
+
+  /**
+    * flatMap - For F[A] and A => F[B], return F[B]
+    */
+  def flatMap[B](f: A => Maybe[B]): Maybe[B] =
+    this match {
+      case Empty() => Empty[B]()
+      case Full(value) => f(value)
+    }
 }
 
 final case class Full[A](value: A) extends Maybe[A]
