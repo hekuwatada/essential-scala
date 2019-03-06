@@ -13,10 +13,7 @@ trait Sum[A, B] {
 
   // Right-biased map
   def map[C](rightF: B => C): Sum[A, C] =
-    this match {
-      case Left(value) => Left(value)
-      case Right(value) => Right(rightF(value))
-    }
+    flatMap(rightF.andThen(Right(_)))
 
   // Right-biased flatMap
   def flatMap[C](rightF: B => Sum[A, C]): Sum[A, C] =
