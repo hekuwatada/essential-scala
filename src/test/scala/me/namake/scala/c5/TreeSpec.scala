@@ -1,6 +1,5 @@
 package me.namake.scala.c5
 
-import org.omg.CORBA.VM_TRUNCATABLE
 import org.scalatest.{FunSpec, Matchers}
 
 class TreeSpec extends FunSpec with Matchers {
