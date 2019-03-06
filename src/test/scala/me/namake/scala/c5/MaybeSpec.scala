@@ -30,4 +30,11 @@ class MaybeSpec extends FunSpec with Matchers {
       Full(1).flatMap(x => Full(x.toString)) shouldBe Full("1")
     }
   }
+
+  describe("map") {
+    it("returns Maybe[B] when A => B is given") {
+      Empty[Int].map(_.toString) shouldBe Empty[String]()
+      Full(1).map(_.toString) shouldBe Full("1")
+    }
+  }
 }

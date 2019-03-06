@@ -23,10 +23,21 @@ trait Maybe[A] {
   /**
     * flatMap - For F[A] and A => F[B], return F[B]
     */
+  // Monad
   def flatMap[B](f: A => Maybe[B]): Maybe[B] =
     this match {
       case Empty() => Empty[B]()
       case Full(value) => f(value)
+    }
+
+  /**
+    * map - Given A => B, return F[B]
+    */
+  // Functor
+  def map[B](f: A => B): Maybe[B] =
+    this match {
+      case Empty() => Empty[B]()
+      case Full(value) => Full(f(value))
     }
 }
 
