@@ -1,4 +1,4 @@
-package me.namake.scala
+package me.namake.scala.c3
 
 object divide {
   def apply(dividend: Int, divisor: Int): DivisionResult =

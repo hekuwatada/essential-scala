@@ -1,4 +1,4 @@
-package me.namake.scala
+package me.namake.scala.c3
 
 import org.scalatest.Matchers
 
