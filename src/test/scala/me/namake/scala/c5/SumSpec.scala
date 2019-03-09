@@ -27,7 +27,7 @@ class SumSpec extends FunSpec with Matchers {
 
   describe("flatMap") {
     it("transforms Sum[A, B] to Sum[A, C]") {
-      Right[Int, Boolean](false).flatMap(x => if (x) Right(1) else Right(0)) shouldBe Right(0)
+      Right[Int, Boolean](false).flatMap((x: Boolean) => if (x) Right(1) else Right(0)) shouldBe Right(0)
       Left("left").flatMap((x: Int) => Right(x.toString)) shouldBe Left("left")
     }
   }

@@ -1,9 +1,10 @@
 package me.namake.scala.c5
 
 /**
-  * Sum type pattern (OR) - Scala provides Either
+  * Covariant Sum type pattern (OR) - Scala provides Either
   */
-trait Sum[A, B] {
+//TODO: Add use of covariant +B
+trait Sum[A, +B] {
 
   def fold[C](leftF: A => C, rightF: B => C): C =
     this match {
@@ -16,7 +17,7 @@ trait Sum[A, B] {
     flatMap(rightF.andThen(Right(_)))
 
   // Right-biased flatMap
-  def flatMap[C](rightF: B => Sum[A, C]): Sum[A, C] =
+  def flatMap[BB >: B, C](rightF: BB => Sum[A, C]): Sum[A, C] =
     this match {
       case Left(value) => Left(value)
       case Right(value) => rightF(value)

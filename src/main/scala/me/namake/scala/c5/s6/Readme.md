@@ -22,3 +22,15 @@ Meaning: Foo[A] is a supertype of Foo[B]
 Foo[-T] is contravariance in terms of T
 
 Meaning: Foo[A] is a subtype of Foo[B]
+
+
+Functions
+
+e.g.
+
+trait Function1[-A, +B] {
+  def apply(a: A): B 
+}
+
+arguments - contravariant
+return type - covariant
