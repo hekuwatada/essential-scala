@@ -4,7 +4,7 @@ package me.namake.scala.c5
   * Covariant Sum type pattern (OR) - Scala provides Either
   */
 //TODO: Add use of covariant +B
-trait Sum[A, +B] {
+trait Sum[+A, +B] {
 
   def fold[C](leftF: A => C, rightF: B => C): C =
     this match {
@@ -17,7 +17,7 @@ trait Sum[A, +B] {
     flatMap(rightF.andThen(Right(_)))
 
   // Right-biased flatMap
-  def flatMap[BB >: B, C](rightF: BB => Sum[A, C]): Sum[A, C] =
+  def flatMap[BB >: B, AA >: A, C](rightF: BB => Sum[AA, C]): Sum[AA, C] =
     this match {
       case Left(value) => Left(value)
       case Right(value) => rightF(value)
