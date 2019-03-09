@@ -13,11 +13,11 @@ class listSpec extends FunSpec with Matchers {
 
     it("removeOdd() replaces odd elements with None") {
       list.removeOdd(List()) shouldBe List()
-      list.removeOdd(List(Full(3))) shouldBe List(Empty[Int]())
+      list.removeOdd(List(Full(3))) shouldBe List(Empty)
       list.removeOdd(List(Full(2))) shouldBe List(Full(2))
-      list.removeOdd(List(Full(3), Full(2))) shouldBe List(Empty[Int](), Full(2))
+      list.removeOdd(List(Full(3), Full(2))) shouldBe List(Empty, Full(2))
       list.removeOdd(List(Full(3), Full(2), Full(1))) should contain theSameElementsAs
-        List(Empty[Int](), Full(2), Empty[Int]())
+        List(Empty, Full(2), Empty)
     }
   }
 }
