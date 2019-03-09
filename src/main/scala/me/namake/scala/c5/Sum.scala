@@ -3,7 +3,6 @@ package me.namake.scala.c5
 /**
   * Covariant Sum type pattern (OR) - Scala provides Either
   */
-//TODO: Add use of covariant +B
 trait Sum[+A, +B] {
 
   def fold[C](leftF: A => C, rightF: B => C): C =
@@ -24,5 +23,5 @@ trait Sum[+A, +B] {
     }
 }
 
-final case class Left[A, B](value: A) extends Sum[A, B]
-final case class Right[A, B](value: B) extends Sum[A, B]
+final case class Left[A](value: A) extends Sum[A, Nothing]
+final case class Right[B](value: B) extends Sum[Nothing, B]

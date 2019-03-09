@@ -9,12 +9,18 @@ class SumSpec extends FunSpec with Matchers {
       Left(1).value shouldBe 1
       Right("foo").value shouldBe "foo"
     }
+
+    it("has covariant types for right and left") {
+      val left = Left(1)
+      val right = Right("s")
+      Seq(left, right) shouldBe a[Seq[Sum[Int, String]]]
+    }
   }
 
   describe("fold") {
     it("transforms A or B to C") {
-      Left[Int, Boolean](3).fold(_.toString, _.toString) shouldBe "3"
-      Right[Int, Boolean](false).fold(_.toString, _.toString) shouldBe "false"
+      Left(3).fold(_.toString, identity) shouldBe "3"
+      Right(false).fold(identity, _.toString) shouldBe "false"
     }
   }
 
@@ -27,8 +33,8 @@ class SumSpec extends FunSpec with Matchers {
 
   describe("flatMap") {
     it("transforms Sum[A, B] to Sum[A, C]") {
-      Right[Int, Boolean](false).flatMap((x: Boolean) => if (x) Right(1) else Right(0)) shouldBe Right(0)
-      Left("left").flatMap((x: Int) => Right(x.toString)) shouldBe Left("left")
+      Right(false).flatMap((x: Boolean) => if (x) Right(1) else Right(0)) shouldBe Right(0)
+      Left("left").flatMap(identity) shouldBe Left("left")
     }
   }
 }
