@@ -4,17 +4,20 @@ trait Animal {
   def name: String
 }
 
-case class Cat(name: String) extends Animal
-//TODO: do not extend case class
-case class Oswald() extends Cat("oswald")
+abstract class Cat extends Animal
+case class Oswald() extends Cat {
+  val name = "oswald"
+}
 
 final case class Dog(name: String) extends Animal
 
 trait SmallAnimal extends Animal //abstract class?
 
-case class Mouse(name: String) extends SmallAnimal
-case object Rat extends Mouse("rat")
+abstract class Mouse extends SmallAnimal
+case object Rat extends Mouse {
+  val name = "rat"
+}
 
 trait Sound
-case class CatSound() extends Sound
+abstract class CatSound() extends Sound
 case class Purr() extends CatSound

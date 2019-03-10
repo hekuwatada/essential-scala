@@ -15,12 +15,12 @@ class EatingHabitSpec extends FunSpec with Matchers {
       val animalMouse: Animal => Mouse = (_) => Rat
       val animalAnimal: Animal => Animal = (_) => Rat // Animal return type not compiling
       val oswaldMouse: Oswald => Mouse = (_) => Rat // Oswald arg type not compiling
-
-      eatRat.findFood(Cat("cat"))(catMouse)
+      val cat: Cat = new Cat { val name = "cat" }
+      eatRat.findFood(cat)(catMouse)
       eatRat.findFood(Oswald())(animalMouse)
 //      eatRat.findFood(Oswald())(oswaldMouse) // Oswald => Mouse does not compile
-      eatRat.findFood(Cat("cat"))(catSmall)
-      eatRat.findFood(Cat("cat"))(animalSmall)
+      eatRat.findFood(cat)(catSmall)
+      eatRat.findFood(cat)(animalSmall)
 //      eatRat.findFood(Cat("cat"))(animalAnimal) // Animal => Animal does not compile
     }
   }

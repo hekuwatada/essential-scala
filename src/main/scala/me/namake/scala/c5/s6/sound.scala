@@ -4,7 +4,7 @@ import me.namake.scala.misc.{Cat, CatSound}
 
 object sound {
   def groom(groomer: Cat => CatSound): CatSound = {
-    val blackCat = Cat("black")
+    val blackCat: Cat = new Cat { val name = "black" }
     groomer(blackCat)
   }
 }

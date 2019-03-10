@@ -7,10 +7,11 @@ class soundSpec extends FunSpec {
 
   describe("groom()") {
     it("accepts contravariant of Cat arg") {
-      sound.groom((_: Cat) => CatSound())
-      sound.groom((_: Animal) => CatSound())
-//      sound.groom((_: Dog) => CatSound())  // Dog (subtype of Animal) as arg does not compile
-//      sound.groom((_: Oswald) => CatSound()) //Oswald (subtype of Cat) as arg does not compile
+      val catSound: CatSound = new CatSound {}
+      sound.groom((_: Cat) => catSound)
+      sound.groom((_: Animal) => catSound)
+//      sound.groom((_: Dog) => catSound)  // Dog (subtype of Animal) as arg does not compile
+//      sound.groom((_: Oswald) => catSound) //Oswald (subtype of Cat) as arg does not compile
     }
 
     it("accepts covariant of CatSound return type") {
