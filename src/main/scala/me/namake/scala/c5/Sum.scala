@@ -16,7 +16,13 @@ trait Sum[+A, +B] {
     flatMap(rightF.andThen(Right(_)))
 
   // Right-biased flatMap
-  def flatMap[BB >: B, AA >: A, C](rightF: BB => Sum[AA, C]): Sum[AA, C] =
+  // Error:
+  //  covariant type A occurs in contravariant position in type B => Sum[A,C] of value rightF
+  // supertype of rightF is accepted
+  // C - new type therefore irrelevant
+  // B - must be covariant due to variance flip therefore ok
+  // A - must be contravariant due to variance flip therefore supertype AA to be introduced
+  def flatMap[AA >: A, C](rightF: B => Sum[AA, C]): Sum[AA, C] =
     this match {
       case Left(value) => Left(value)
       case Right(value) => rightF(value)
