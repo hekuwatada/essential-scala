@@ -14,3 +14,7 @@ trait SmallAnimal extends Animal //abstract class?
 
 case class Mouse(name: String) extends SmallAnimal
 case object Rat extends Mouse("rat")
+
+trait Sound
+case class CatSound() extends Sound
+case class Purr() extends CatSound
