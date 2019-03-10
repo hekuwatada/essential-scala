@@ -13,5 +13,9 @@ class ExpressionSpec extends FunSpec with Matchers {
       Division(Number(4), Number(0)).eval shouldBe Left("Division by zero")
       Division(Addition(Subtraction(Number(8), Number(6)), Number(2)), Number(2)).eval shouldBe Right(2.0)
     }
+
+    it("returns left failure") {
+      Division(SquareRoot(Number(-1)), Number(0)).eval shouldBe Left("Square root of negative number")
+    }
   }
 }
