@@ -3,7 +3,7 @@ package me.namake.scala.c5
 /**
   * Covariant Sum type pattern (OR) - Scala provides Either
   */
-trait Sum[+A, +B] {
+sealed trait Sum[+A, +B] {
 
   def fold[C](leftF: A => C, rightF: B => C): C =
     this match {
