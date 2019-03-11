@@ -21,4 +21,11 @@ class seqAddonSpec extends FunSpec with Matchers {
       seqAddon.min(Seq()) shouldBe Int.MaxValue
     }
   }
+
+  describe("foldLeft()") {
+    it("sums all integers in collection") {
+      seqAddon.foldLeft(Seq(1, 2, 3))(0)(_ + _) shouldBe 6
+      seqAddon.foldLeft(Seq.empty[Int])(0)(_ + _) shouldBe 0
+    }
+  }
 }
