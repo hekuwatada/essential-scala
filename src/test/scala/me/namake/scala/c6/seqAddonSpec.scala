@@ -22,6 +22,13 @@ class seqAddonSpec extends FunSpec with Matchers {
     }
   }
 
+  describe("map()") {
+    it("transforms A to B") {
+      seqAddon.map(Seq(2, 3, 6))(_.toString) shouldBe Seq("2", "3", "6")
+      seqAddon.map(Seq.empty[Int])(_.toString) shouldBe Seq.empty[String]
+    }
+  }
+
   describe("foldLeft()") {
     it("sums all integers in collection") {
       seqAddon.foldLeft(Seq(1, 2, 3))(0)(_ + _) shouldBe 6
