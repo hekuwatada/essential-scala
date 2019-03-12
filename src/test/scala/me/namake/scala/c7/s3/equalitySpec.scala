@@ -4,7 +4,6 @@ import org.scalatest.{FunSpec, Matchers}
 
 class equalitySpec extends FunSpec with Matchers {
 
-  //TODO: remove code duplication
   private def testEmailEquality(eq: (Person, Person) => Boolean): Unit = {
     val p1 = Person("name", "email")
     val p2 = p1.copy(name = "another name")
@@ -29,53 +28,39 @@ class equalitySpec extends FunSpec with Matchers {
 
   describe("equality for Person") {
     it("considers identical email addresses as equal") {
-      val p1 = Person("name", "email")
-      val p2 = p1.copy(name = "another name")
-      val p3 = p1.copy(email = "another email")
-
-      equality.personEqualityByEmailImplicit.eq.equal(p1, p1) shouldBe true
-      equality.personEqualityByEmailImplicit.eq.equal(p1, p2) shouldBe true
-      equality.personEqualityByEmailImplicit.eq.equal(p1, p3) shouldBe false
+      testEmailEquality(equality.personEqualityByEmailImplicit.eq.equal)
     }
 
     it("considers identical name and email addresses as equal") {
-      val p1 = Person("name", "email")
-      val p2 = p1.copy(name = "another name")
-      val p3 = p1.copy(email = "another email")
-      val p4 = Person("name", "email")
-
-      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p1) shouldBe true
-      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p4) shouldBe true
-      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p2) shouldBe false
-      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p3) shouldBe false
+      testNameEmailEquality(equality.personEqualityByNameEmailImplicit.eq.equal)
     }
   }
 
-  describe("type class interface pattern") {
+  describe("type class pattern") {
     it("considers identical email addresses as equal") {
-      val p1 = Person("name", "email")
-      val p2 = p1.copy(name = "another name")
-      val p3 = p1.copy(email = "another email")
-
-      import equality.personEqualityByEmailImplicit.{eq => eqF}
-
-      equality.Eq(p1, p1) shouldBe true
-      equality.Eq(p1, p2) shouldBe true
-      equality.Eq(p1, p3) shouldBe false
+      testEmailEquality((x, y) => {
+        import equality.personEqualityByEmailImplicit.{eq => eqImplicit}
+        equality.Eq(x, y)
+      })
     }
 
     it("considers identical name and email addresses as equal") {
-      val p1 = Person("name", "email")
-      val p2 = p1.copy(name = "another name")
-      val p3 = p1.copy(email = "another email")
-      val p4 = Person("name", "email")
+      testNameEmailEquality((x, y) => {
+        import equality.personEqualityByNameEmailImplicit.{eq => eqImplicit}
+        equality.Eq(x, y)
+      })
+    }
+  }
 
-      import equality.personEqualityByNameEmailImplicit.{eq => eqF}
-
-      equality.Eq(p1, p1) shouldBe true
-      equality.Eq(p1, p4) shouldBe true
-      equality.Eq(p1, p2) shouldBe false
-      equality.Eq(p1, p3) shouldBe false
+  describe("type class pattern") {
+    it("returns implicit Equal instance") {
+      testEmailEquality((x, y) => {
+        import equality.personEqualityByEmailImplicit.{eq => eqImplicit}
+        //NOTE: two helper interfaces
+        // 1. equality.Eq[A](..)(implicit eq: Equal[A])
+        // 2. Equal[A](implicit eq: Equal[A])
+        Equal[Person].equal(x, y)
+      })
     }
   }
 }
