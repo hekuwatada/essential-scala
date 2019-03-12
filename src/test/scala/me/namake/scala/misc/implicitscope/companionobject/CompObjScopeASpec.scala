@@ -12,5 +12,10 @@ class CompObjScopeASpec extends FunSpec with Matchers {
     it("can be overridden by package object scope") {
       implicitly[CompObjScopeA[String]] shouldBe CompObjScopeA("in package object")
     }
+
+    it("cannot have implicits in nested object") {
+      // not compiling
+//      implicitly[CompObjScopeA[Double]] shouldBe CompObjScopeA(9.876)
+    }
   }
 }
