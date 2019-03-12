@@ -10,4 +10,6 @@ object ordering {
   // Single abstract method equivalent to above absOrdering
   val absOrdering2: Ordering[Int] =
     (x: Int, y: Int) => Integer.compare(Math.abs(x), Math.abs(y))
+
+  implicit val absOrdering3: Ordering[Int] = Ordering.fromLessThan((x, y) => Math.abs(x) < Math.abs(y))
 }
