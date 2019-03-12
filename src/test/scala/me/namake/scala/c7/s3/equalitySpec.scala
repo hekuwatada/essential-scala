@@ -4,6 +4,7 @@ import org.scalatest.{FunSpec, Matchers}
 
 class equalitySpec extends FunSpec with Matchers {
 
+  //TODO: remove code duplication
   private def testEmailEquality(eq: (Person, Person) => Boolean): Unit = {
     val p1 = Person("name", "email")
     val p2 = p1.copy(name = "another name")
@@ -32,9 +33,9 @@ class equalitySpec extends FunSpec with Matchers {
       val p2 = p1.copy(name = "another name")
       val p3 = p1.copy(email = "another email")
 
-      equality.personEqualityByEmail.eq.equal(p1, p1) shouldBe true
-      equality.personEqualityByEmail.eq.equal(p1, p2) shouldBe true
-      equality.personEqualityByEmail.eq.equal(p1, p3) shouldBe false
+      equality.personEqualityByEmailImplicit.eq.equal(p1, p1) shouldBe true
+      equality.personEqualityByEmailImplicit.eq.equal(p1, p2) shouldBe true
+      equality.personEqualityByEmailImplicit.eq.equal(p1, p3) shouldBe false
     }
 
     it("considers identical name and email addresses as equal") {
@@ -43,10 +44,10 @@ class equalitySpec extends FunSpec with Matchers {
       val p3 = p1.copy(email = "another email")
       val p4 = Person("name", "email")
 
-      equality.personEqualityByNameEmail.eq.equal(p1, p1) shouldBe true
-      equality.personEqualityByNameEmail.eq.equal(p1, p4) shouldBe true
-      equality.personEqualityByNameEmail.eq.equal(p1, p2) shouldBe false
-      equality.personEqualityByNameEmail.eq.equal(p1, p3) shouldBe false
+      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p1) shouldBe true
+      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p4) shouldBe true
+      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p2) shouldBe false
+      equality.personEqualityByNameEmailImplicit.eq.equal(p1, p3) shouldBe false
     }
   }
 
@@ -56,7 +57,7 @@ class equalitySpec extends FunSpec with Matchers {
       val p2 = p1.copy(name = "another name")
       val p3 = p1.copy(email = "another email")
 
-      import equality.personEqualityByEmail.{eq => eqF}
+      import equality.personEqualityByEmailImplicit.{eq => eqF}
 
       equality.Eq(p1, p1) shouldBe true
       equality.Eq(p1, p2) shouldBe true
@@ -69,7 +70,7 @@ class equalitySpec extends FunSpec with Matchers {
       val p3 = p1.copy(email = "another email")
       val p4 = Person("name", "email")
 
-      import equality.personEqualityByNameEmail.{eq => eqF}
+      import equality.personEqualityByNameEmailImplicit.{eq => eqF}
 
       equality.Eq(p1, p1) shouldBe true
       equality.Eq(p1, p4) shouldBe true

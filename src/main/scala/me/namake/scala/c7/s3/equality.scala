@@ -1,13 +1,13 @@
 package me.namake.scala.c7.s3
 
 object equality {
-  object personEqualityByEmail {
+  object personEqualityByEmailImplicit {
     implicit object eq extends Equal[Person] {
       override def equal(x: Person, y: Person): Boolean = x.email == y.email
     }
   }
 
-  object personEqualityByNameEmail {
+  object personEqualityByNameEmailImplicit {
     implicit object eq extends Equal[Person] {
       override def equal(x: Person, y: Person): Boolean =
         x.name == y.name && x.email == y.email
