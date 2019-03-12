@@ -27,6 +27,14 @@ object Expression {
         op(l, r)
       }
     }
+
+  // flatMap + map => for comprehension
+//  def liftTwo2(left: CalcResult, right: CalcResult, op: (Double, Double) => CalcResult): Sum[String, Double] =
+//    for {
+//      l: Double <- left
+//      r: Double <- right
+//      result: Double <- op(l, r)
+//    } yield result
 }
 
 final case class Addition(left: Expression, right: Expression) extends Expression {

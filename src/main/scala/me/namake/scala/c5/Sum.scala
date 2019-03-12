@@ -27,6 +27,10 @@ sealed trait Sum[+A, +B] {
       case Left(value) => Left(value)
       case Right(value) => rightF(value)
     }
+
+  //TODO: implement withFilter (non-strict) or filter
+  //@see https://docs.scala-lang.org/tour/for-comprehensions.html
+//  def withFilter(p: A => Boolean): Sum[A, B] = ???
 }
 
 final case class Left[A](value: A) extends Sum[A, Nothing]
