@@ -8,5 +8,9 @@ class CompObjScopeASpec extends FunSpec with Matchers {
     it("can have implicit instances that can be found by compiler by default") {
       implicitly[CompObjScopeA[Int]] shouldBe CompObjScopeA(99)
     }
+
+    it("can be overridden by package object scope") {
+      implicitly[CompObjScopeA[String]] shouldBe CompObjScopeA("in package object")
+    }
   }
 }
