@@ -1,4 +1,4 @@
-package me.namake.scala.misc.valueType
+package me.namake.scala.misc.valueClass
 
 object IntAddon {
   //@see https://docs.scala-lang.org/overviews/core/implicit-classes.html
