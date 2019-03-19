@@ -43,4 +43,23 @@ class LinkedListSpec extends FunSpec with Matchers {
         .map(_.toString) shouldBe Pair("1", Pair("2", End()))
     }
   }
+
+  describe("reverse") {
+    it("reverses elements") {
+      Pair(1, Pair(2, Pair(3, Pair(4, End())))).reverse shouldBe Pair(4, Pair(3, Pair(2, Pair(1, End()))))
+      End().reverse shouldBe End()
+    }
+  }
+
+  describe("tail recursive fold") {
+    it("folds list") {
+      pending
+      val list: LinkedList[Int] = Pair(1, Pair(2, Pair(3, Pair(4, End()))))
+
+      //TODO: fix the order of elements
+      LinkedList
+        .foldRecursive[Int, LinkedList[String]](End(), list)((x, y) => Pair(x.toString, y)) shouldBe
+          Pair("1", Pair("2", Pair("3", Pair("4", End()))))
+    }
+  }
 }
