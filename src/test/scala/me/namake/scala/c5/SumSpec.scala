@@ -13,7 +13,7 @@ class SumSpec extends FunSpec with Matchers {
     it("has covariant types for right and left") {
       val left: Sum[String, Double] = Left("error")
       val right: Sum[String, Double] = Right(2.0)
-      Seq(left, right) shouldBe a[Seq[Sum[String, Double]]]
+      Seq(left, right) shouldBe a[Seq[Sum[String, Double]]] //TODO: fix compiler warning
     }
   }
 

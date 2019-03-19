@@ -11,7 +11,7 @@ class BoxSpec extends FunSpec with Matchers {
     it("sets supertype of A") {
       val box1: Box[FuncArg] = Box[FuncArg](EmptyArg)
       val box2: Box[FuncArg] = box1.set(SubStrArg("string", "extra"))
-      box2 shouldBe a[Box[SubStrArg]]
+      box2 shouldBe a[Box[SubStrArg]] //TODO: fix compiler warning
     }
   }
 
