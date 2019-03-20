@@ -4,7 +4,10 @@ trait Animal {
   def name: String
 }
 
-abstract class Cat extends Animal
+abstract class Cat extends Animal {
+  def meow: String = "meow"
+}
+
 case class Oswald() extends Cat {
   val name = "oswald"
 }
